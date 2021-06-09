@@ -13,6 +13,10 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
+    public Movie() {
+
+    }
+
     public String getName() {
         return name;
     }
