@@ -10,7 +10,7 @@ public class MovieService {
     private List<Movie> movies = new ArrayList<>();
 
     public void save(Movie movie) {
-        if (movie == null) {
+        if (movie == null || movie.getReleaseDate()==null) {
             throw new IllegalArgumentException("Cannot be null!");
         }
         movies.add(movie);
