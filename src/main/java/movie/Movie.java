@@ -38,6 +38,14 @@ public class Movie {
     }
 
     public void setReleaseDate(LocalDate releaseDate) {
+        validator(releaseDate);
         this.releaseDate = releaseDate;
     }
+
+    private void validator(LocalDate localDate) {
+        if (localDate == null) {
+            throw new IllegalArgumentException("Time cannot be null");
+        }
+    }
+
 }
