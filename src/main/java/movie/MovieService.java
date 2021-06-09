@@ -1,6 +1,5 @@
 package movie;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,23 +7,33 @@ public class MovieService {
     private List<Movie> movies = new ArrayList<>();
 
     public void save(Movie movie) {
-        if (movie == null || movie.getReleaseDate() == null) {
-            throw new IllegalArgumentException("Cannot be null!");
+        if (movie == null) {
+            throw new IllegalArgumentException("Parameter cannot be null!");
         }
         movies.add(movie);
     }
 
     public List<Movie> findMovieByNamePart(String part) {
+        if (part == null) {
+            throw new IllegalArgumentException("Parameter cannot be null!");
+        }
+
+        String findThis = part.toLowerCase();
+
         return movies
                 .stream()
-                .filter(movie -> movie.getName().contains(part))
+                .filter(movie -> movie.getName() != null && movie.getName().toLowerCase().contains(findThis))
                 .collect(Collectors.toList());
     }
 
     public Optional<Movie> findNewest() {
         return movies
                 .stream()
-                .max(Comparator.comparing(Movie::getReleaseDate));
+                .max(Comparator.comparing(Movie::getReleaseDate, Comparator.nullsFirst(Comparator.naturalOrder())));
+    }
+
+    public List<Movie> getMovies() {
+        return new ArrayList<>(movies);
     }
 
     public Integer totalLength() {
@@ -33,18 +42,14 @@ public class MovieService {
                 .reduce(0, (a, b) -> a + b.getLength(), (x, y) -> x + y);
     }
 
-    public List<Movie> getMovies() {
-        return new ArrayList<>(movies);
-    }
-
-    public Map<Integer, Integer> countingFilmsByReleaseDate() {
+    public Map<Integer, Integer> countingFilmsByYearOfRelease() {
         return movies
                 .stream()
                 .collect(Collectors.toMap(m -> m.getReleaseDate().getYear(), n -> 1, Integer::sum));
 
     }
 
-    public Optional<Movie> shortestFilm() {
+    public Optional<Movie> findShortestFilm() {
         return movies
                 .stream()
                 .min(Comparator.comparing(Movie::getLength));

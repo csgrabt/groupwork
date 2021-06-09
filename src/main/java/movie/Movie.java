@@ -7,13 +7,14 @@ public class Movie {
     private int length;
     private LocalDate releaseDate;
 
+    public Movie() {
+    }
+
     public Movie(String name, int length, LocalDate releaseDate) {
-        validator(releaseDate);
         this.name = name;
         this.length = length;
         this.releaseDate = releaseDate;
     }
-
 
     public String getName() {
         return name;
@@ -36,14 +37,6 @@ public class Movie {
     }
 
     public void setReleaseDate(LocalDate releaseDate) {
-        validator(releaseDate);
         this.releaseDate = releaseDate;
     }
-
-    private void validator(LocalDate localDate) {
-        if (localDate == null) {
-            throw new IllegalArgumentException("Time cannot be null");
-        }
-    }
-
 }
