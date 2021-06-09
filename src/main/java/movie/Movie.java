@@ -8,6 +8,7 @@ public class Movie {
     private LocalDate releaseDate;
 
     public Movie(String name, int length, LocalDate releaseDate) {
+        validator(releaseDate);
         this.name = name;
         this.length = length;
         this.releaseDate = releaseDate;
