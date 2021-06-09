@@ -27,9 +27,9 @@ class MovieServiceTest {
     @Test
     void saveTest() {
 
-        movieService.save(new Movie());
+        movieService.save(new Movie("HP4", 254, LocalDate.of(2003, 12, 12)));
         assertEquals(5, movieService.getMovies().size());
-        assertEquals(null, movieService.getMovies().get(4).getName());
+
 
     }
 
