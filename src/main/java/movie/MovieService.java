@@ -37,12 +37,17 @@ public class MovieService {
         return new ArrayList<>(movies);
     }
 
-    public Map<LocalDate, Integer> countingFilmsByReleaseDate() {
+    public Map<Integer, Integer> countingFilmsByReleaseDate() {
         return movies
                 .stream()
-                .collect(Collectors.toMap(m -> m.getReleaseDate(), n -> 1, Integer::sum));
+                .collect(Collectors.toMap(m -> m.getReleaseDate().getYear(), n -> 1, Integer::sum));
 
     }
 
+    public Optional<Movie> shortestFilm() {
+        return movies
+                .stream()
+                .min(Comparator.comparing(Movie::getLength));
 
+    }
 }
