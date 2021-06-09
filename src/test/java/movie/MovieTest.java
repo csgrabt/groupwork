@@ -53,7 +53,7 @@ class MovieTest {
     }
 
     @Test
-    void constructor(){
+    void constructorNullDate(){
         Exception exception = assertThrows(IllegalArgumentException.class, ()->
                 new Movie("title",1,null));
 
