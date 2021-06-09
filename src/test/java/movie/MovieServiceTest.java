@@ -33,5 +33,10 @@ class MovieServiceTest {
 
     }
 
+    @Test
+    void testFindNewest() {
+        Movie movie = movieService.findNewest().get();
 
+        assertEquals("HP4", movie.getName());
+    }
 }
