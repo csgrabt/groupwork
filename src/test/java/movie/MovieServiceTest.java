@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,22 +22,43 @@ class MovieServiceTest {
         movieService.save(movie2);
         movieService.save(movie3);
         movieService.save(movie4);
-
     }
 
     @Test
     void saveTest() {
-
         movieService.save(new Movie("HP4", 254, LocalDate.of(2003, 12, 12)));
         assertEquals(5, movieService.getMovies().size());
-
-
     }
 
     @Test
     void testFindNewest() {
         Movie movie = movieService.findNewest().get();
-
         assertEquals("HP4", movie.getName());
     }
+
+    @Test
+    void testFindMovieByNamePartListIsEmpty() {
+        MovieService movieService1 = new MovieService();
+        List<Movie> movieList = movieService1.findMovieByNamePart("");
+        assertEquals(0, movieList.size());
+    }
+
+
+    @Test
+    void testFindMovieByNamePart() {
+        List<Movie> movieList = movieService.findMovieByNamePart("LLL");
+        assertEquals(0, movieList.size());
+    }
+
+    @Test
+    void testFindMovieByNamePartValid() {
+        List<Movie> movieList = movieService.findMovieByNamePart("HP");
+        assertEquals(4, movieList.size());
+    }
+    @Test
+    void testFindMovieByNamePartValidNotCapital() {
+        List<Movie> movieList = movieService.findMovieByNamePart("hp");
+        assertEquals(0, movieList.size());
+    }
+
 }
