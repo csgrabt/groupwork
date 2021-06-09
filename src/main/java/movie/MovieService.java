@@ -10,6 +10,9 @@ public class MovieService {
     private List<Movie> movies = new ArrayList<>();
 
     public void save(Movie movie) {
+        if (movie == null) {
+            throw new IllegalArgumentException("Cannot be null!");
+        }
         movies.add(movie);
     }
 
@@ -24,5 +27,9 @@ public class MovieService {
         return movies
                 .stream()
                 .max(Comparator.comparing(Movie::getReleaseDate));
+    }
+
+    public List<Movie> getMovies() {
+        return new ArrayList<>(movies);
     }
 }
