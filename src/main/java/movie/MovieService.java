@@ -1,5 +1,6 @@
 package movie;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,8 +33,16 @@ public class MovieService {
                 .reduce(0, (a, b) -> a + b.getLength(), (x, y) -> x + y);
     }
 
-
     public List<Movie> getMovies() {
         return new ArrayList<>(movies);
     }
+
+    public Map<LocalDate, Integer> countingFilmsByReleaseDate() {
+        return movies
+                .stream()
+                .collect(Collectors.toMap(m -> m.getReleaseDate(), n -> 1, Integer::sum));
+
+    }
+
+
 }
