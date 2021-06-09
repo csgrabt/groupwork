@@ -11,7 +11,6 @@ class MovieServiceTest {
     void saveTest() {
         movieService.save(new Movie());
         assertEquals(1, movieService.getMovies().size());
-
     }
 
 

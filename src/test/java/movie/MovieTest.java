@@ -51,4 +51,11 @@ class MovieTest {
         movie.setReleaseDate(LocalDate.of(2001, 1, 1));
         assertEquals(LocalDate.of(2001, 1, 1),movie.getReleaseDate());
     }
+
+    @Test
+    void constructor(){
+        Exception exception = assertThrows(IllegalArgumentException.class, ()->
+                new Movie("title",1,null));
+
+    }
 }
