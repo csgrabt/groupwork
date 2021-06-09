@@ -1,16 +1,13 @@
 package movie;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MovieService {
     private List<Movie> movies = new ArrayList<>();
 
     public void save(Movie movie) {
-        if (movie == null || movie.getReleaseDate()==null) {
+        if (movie == null || movie.getReleaseDate() == null) {
             throw new IllegalArgumentException("Cannot be null!");
         }
         movies.add(movie);
@@ -28,6 +25,13 @@ public class MovieService {
                 .stream()
                 .max(Comparator.comparing(Movie::getReleaseDate));
     }
+
+    public Integer totalLength() {
+        return movies
+                .stream()
+                .reduce(0, (a, b) -> a + b.getLength(), (x, y) -> x + y);
+    }
+
 
     public List<Movie> getMovies() {
         return new ArrayList<>(movies);
