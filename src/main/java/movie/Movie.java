@@ -16,6 +16,7 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
+
     public String getName() {
         return name;
     }

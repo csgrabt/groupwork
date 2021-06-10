@@ -45,6 +45,7 @@ public class MovieService {
     public Map<Integer, Integer> countingFilmsByYearOfRelease() {
         return movies
                 .stream()
+                .filter(n -> n.getReleaseDate() != null)
                 .collect(Collectors.toMap(m -> m.getReleaseDate().getYear(), n -> 1, Integer::sum));
 
     }
@@ -52,6 +53,7 @@ public class MovieService {
     public Optional<Movie> findShortestFilm() {
         return movies
                 .stream()
+                .filter(n -> n.getLength() > 0)
                 .min(Comparator.comparing(Movie::getLength));
 
     }
